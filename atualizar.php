@@ -1,3 +1,18 @@
+<?php
+require_once"src/funcoes-alunos.php";
+$idAluno = filter_input(INPUT_GET, 'id',
+FILTER_SANITIZE_NUMBER_INT);
+
+$nomeDoAluno = lerUmAluno($conexao, $idAluno);
+if (isset($_POST['atualizar'])) {
+    $nomeDoAluno = filter_input(INPUT_POST, "nome", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+    atualizarAluno($conexao, $nomeDoAluno, $idAluno);
+    header("location:visualizar.php?status=sucesso");
+}
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>

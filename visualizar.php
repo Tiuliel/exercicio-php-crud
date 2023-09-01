@@ -1,3 +1,9 @@
+<?php
+require_once"src/funcoes-alunos.php";
+$listaDeAlunos = lerAlunos($conexao);
+
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -11,6 +17,13 @@
     <h1>Lista de alunos</h1>
     <hr>
     <p><a href="inserir.php">Inserir novo aluno</a></p>
+
+
+    <?php if (isset($_GET['status']) && $_GET['status'] === 'sucesso'){ ?>
+        <h2 style="color: red;">Alunos atualizados com sucesso!!</h2>
+    <?php } ?>
+
+    
 
    <!-- Aqui você deverá criar o HTML que quiser e o PHP necessários
 para exibir a relação de alunos existentes no banco de dados.
