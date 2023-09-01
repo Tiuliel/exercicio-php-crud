@@ -5,7 +5,7 @@ if (isset($_POST['inserir'])) {
 	
 	$nomeDoAluno = filter_input(INPUT_POST, "nome", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 	$nota1 = filter_input(INPUT_POST, "primeira", FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
-	$nota1 = filter_input(INPUT_POST, "segunda", FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
+	$nota2 = filter_input(INPUT_POST, "segunda", FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
 	inserirAlunos($conexao, $nomeDoAluno, $nota1, $nota2);
 	header("location:visualizar.php");
 }
@@ -37,7 +37,7 @@ if (isset($_POST['inserir'])) {
 	    <p><label for="segunda">Segunda nota:</label>
 	    <input type="number" name="segunda" id="segunda" step="0.01" min="0.00" max="10.00" required></p>
 	    
-      <button>Cadastrar aluno</button>
+      <button name="inserir">Cadastrar aluno</button>
 	</form>
 
     <hr>
