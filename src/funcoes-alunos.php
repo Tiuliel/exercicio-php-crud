@@ -69,3 +69,32 @@ function excluirAluno(PDO $conexao, int $idAluno):void{
         die("Erro ao excluir: ".$erro->getMessage());
     }
 }
+
+function visualizarAlunos(PDO $conexao):array{
+    $sql = "SELECT *, CAST(((nota1 + nota2) / 2) AS DEC(4,2)) AS media
+        FROM alunos ORDER BY nome";
+
+    try {
+        $query = $conexao->prepare($sql);
+        $query->execute();
+        $resultado = $query->fetchAll(PDO::FETCH_ASSOC);
+    } catch (Exception $erro) {
+        die("Erro ao visualizar: ".$erro->getMessage());
+    }
+    return $resultado;
+}
+
+function visualizarUmAluno(PDO $conexao, int $idAluno):array{
+    $sql = "SELECT *, CAST(((nota1 + nota2) / 2) AS DEC(4,2)) AS media
+        FROM alunos WHERE id = :id ORDER BY nome";
+
+    try {
+        $query = $conexao->prepare($sql);
+        $query->bindValue(":id", $idAluno, PDO::PARAM_INT);
+        $query->execute();
+        $resultado = $query->fetch(PDO::FETCH_ASSOC);
+    } catch (Exception $erro) {
+        die("Erro ao visualizar: ".$erro->getMessage());
+    }
+    return $resultado;
+}
