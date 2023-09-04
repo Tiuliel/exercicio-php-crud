@@ -54,6 +54,18 @@ if (isset($_POST['atualizar'])) {
         <p>
         <!-- Campo somente leitura e desabilitado para edição.
         Usado apenas para exibição do valor da média -->
+        <?php
+                if($nomeDoAluno["media"] >= 7){
+                    $situacao = "Aprovado";
+                    
+                } elseif($nomeDoAluno["media"] >= 5){
+                    $situacao = "Recuperação";
+                    
+                } else {
+                    $situacao = "Reprovado";
+                    
+                } 
+            ?>
             <label for="media">Média:</label>
             <input name="media" type="number" id="media" step="0.01" min="0.00" max="10.00" readonly disabled>
         </p>
