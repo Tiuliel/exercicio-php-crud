@@ -6,7 +6,19 @@ FILTER_SANITIZE_NUMBER_INT);
 $nomeDoAluno = lerUmAluno($conexao, $idAluno);
 if (isset($_POST['atualizar'])) {
     $nomeDoAluno = filter_input(INPUT_POST, "nome", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-    atualizarAluno($conexao, $nomeDoAluno, $idAluno);
+
+    $nota1 = filter_input(
+        INPUT_POST,
+        "nota1", FILTER_SANITIZE_NUMBER_FLOAT,
+        FILTER_FLAG_ALLOW_FRACTION
+      );
+      $nota2 = filter_input(
+        INPUT_POST, "nota2",
+        FILTER_SANITIZE_SPECIAL_CHARS,
+        FILTER_FLAG_ALLOW_FRACTION
+      );
+
+    atualizarAluno($conexao, $nomeDoAluno, $idAluno, $nota1, $nota2);
     header("location:visualizar.php?status=sucesso");
 }
 ?>
@@ -33,11 +45,11 @@ if (isset($_POST['atualizar'])) {
 	    <p><label for="nome">Nome:</label>
 	    <input type="text" name="nome" id="nome" required></p>
         
-        <p><label for="primeira">Primeira nota:</label>
-	    <input name="primeira" type="number" id="primeira" step="0.01" min="0.00" max="10.00" required></p>
+        <p><label for="nota1">Primeira nota:</label>
+	    <input name="nota1" type="number" id="primeira" step="0.01" min="0.00" max="10.00" required></p>
 	    
-	    <p><label for="segunda">Segunda nota:</label>
-	    <input name="segunda" type="number" id="segunda" step="0.01" min="0.00" max="10.00" required></p>
+	    <p><label for="nota2">Segunda nota:</label>
+	    <input name="nota2" type="number" id="segunda" step="0.01" min="0.00" max="10.00" required></p>
 
         <p>
         <!-- Campo somente leitura e desabilitado para edição.
@@ -53,7 +65,7 @@ if (isset($_POST['atualizar'])) {
 	        <input type="text" name="situacao" id="situacao" readonly disabled>
         </p>
 	    
-        <button name="atualizar-dados">Atualizar dados do aluno</button>
+        <button name="atualizar">Atualizar dados do aluno</button>
 	</form>    
     
     <hr>

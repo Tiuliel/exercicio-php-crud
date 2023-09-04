@@ -13,14 +13,19 @@ $listaDeAlunos = lerAlunos($conexao);
 <style>
         *{box-sizing: border-box;}
 
-        .alunos{
-            font-family: 'Segoe UI';
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            width: 80%;
-            margin: auto;
-        }
+        .alunos {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    width: 80%;
+    margin: auto;
+}
+
+.aluno {
+    padding: 1rem;
+    width: 49%;
+    box-shadow: black 0 0 10px;
+}
 
     </style>
 <link href="css/style.css" rel="stylesheet">
@@ -33,21 +38,22 @@ $listaDeAlunos = lerAlunos($conexao);
 
 
  
-    <?php foreach($listaDeAlunos AS $aluno){
-       ?>
-       <div class="alunos"> 
-        <p><b>Nome: </b> <?=$aluno["nome"]?>
-        </p>
-        <p><b>Nota1: </b><?=$aluno["nota1"]?></p>
-        <p><b>Nota2: </b><?=$aluno["nota2"]?></p>
-
-        <hr>
-        <p> <a href="atualizar.php?id=<?=$aluno["id"]?>">Atualizar</a> </p>
-        <p> <a class="excluir" href="excluir.php?id=<?=$aluno["id"]?>">excluir</a> </p>
-</div>
-       
-       
-<?php }?>
+    <div class="alunos">
+        <?php foreach($listaDeAlunos AS $aluno){
+           ?>
+           <div class="aluno">
+            <p><b>Nome: </b> <?=$aluno["nome"]?>
+            </p>
+            <p><b>Nota1: </b><?=$aluno["nota1"]?></p>
+            <p><b>Nota2: </b><?=$aluno["nota2"]?></p>
+            <hr>
+            <p> <a href="atualizar.php?id=<?=$aluno["id"]?>">Atualizar</a> </p>
+            <p> <a class="excluir" href="excluir.php?id=<?=$aluno["id"]?>">excluir</a> </p>
+        </div>
+        
+           
+        <?php }?>
+    </div>
   
 
     
